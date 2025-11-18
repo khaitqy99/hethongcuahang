@@ -23,12 +23,6 @@
             padding: 0;
             box-sizing: border-box;
         }
-        html, body {
-            overflow: hidden;
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f3f4f6;
@@ -40,7 +34,6 @@
             max-width: 1400px;
             margin: 0 auto;
             padding: 16px;
-            box-sizing: border-box;
         }
         /* Main Title */
         .main-title {
@@ -110,28 +103,22 @@
         /* Main Layout */
         .main-layout {
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
             gap: 24px;
-            align-items: flex-start;
         }
         /* Store List Column */
         .store-list-column {
-            flex: 0 0 45%;
-            min-width: 0;
+            width: 100%;
         }
         .store-list-container {
             background-color: #ffffff;
             border-radius: 8px;
             box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
             overflow: hidden;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
         }
         .store-list-header {
             padding: 16px;
             border-bottom: 1px solid #e5e7eb;
-            flex-shrink: 0;
         }
         .store-list-header h2 {
             font-size: 1.125rem;
@@ -140,48 +127,7 @@
         }
         .store-list-content {
             overflow-y: auto;
-            flex: 1;
-            max-height: 650px;
-        }
-        /* Store Item Hidden State */
-        .store-item.hidden-item {
-            display: none;
-        }
-        /* Show More Button */
-        .show-more-container {
-            padding: 16px;
-            text-align: center;
-            border-top: 1px solid #e5e7eb;
-            background-color: #ffffff;
-        }
-        .show-more-button {
-            background-color: #00b4fb;
-            color: #ffffff;
-            padding: 10px 24px;
-            border: none;
-            border-radius: 6px;
-            font-weight: 500;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .show-more-button:hover {
-            background-color: #0099e6;
-        }
-        .show-more-button:focus {
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(0, 180, 251, 0.2);
-        }
-        .show-more-button svg {
-            width: 16px;
-            height: 16px;
-            transition: transform 0.2s;
-        }
-        .show-more-button.expanded svg {
-            transform: rotate(180deg);
+            height: 600px;
         }
         /* Store Item */
         .store-item {
@@ -222,11 +168,8 @@
         }
         /* Map Column */
         .map-column {
-            flex: 1;
-            min-width: 0;
-            aspect-ratio: 1 / 1;
             width: 100%;
-            position: relative;
+            height: 650px;
         }
         .map-container {
             background-color: #ffffff;
@@ -235,7 +178,6 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            position: relative;
         }
         .store-list-scrollbar::-webkit-scrollbar {
             width: 6px;
@@ -279,125 +221,17 @@
             height: 100%;
             width: 100%;
             border-radius: 8px;
-            position: relative;
-            min-height: 300px;
+            min-height: 400px;
         }
-        /* Mobile Tab Navigation - Ẩn hoàn toàn */
-        .mobile-tabs {
-            display: none;
-        }
-        .mobile-tab-button {
-            flex: 1;
-            padding: 12px 16px;
-            background-color: #f3f4f6;
-            border: none;
-            border-bottom: 2px solid transparent;
-            font-size: 14px;
-            font-weight: 600;
-            color: #6b7280;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .mobile-tab-button.active {
-            background-color: #ffffff;
-            color: #00b4fb;
-            border-bottom-color: #00b4fb;
-        }
-        /* Tất cả nội dung luôn hiển thị */
-        .mobile-tab-content {
-            display: block;
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            .main-layout {
-                flex-direction: column;
-            }
-            .store-list-column {
-                flex: 1;
-                width: 100%;
-            }
-            .map-column {
-                width: 100%;
-                aspect-ratio: 1 / 1;
-            }
-            .store-list-content {
-                max-height: none;
-                overflow: visible;
-            }
-        }
-        
         @media (max-width: 768px) {
-            .container {
-                padding: 12px;
-            }
-            .main-title {
-                font-size: 1.25rem;
-                margin-bottom: 16px;
-            }
-            .filter-section {
-                padding: 12px;
-                margin-bottom: 16px;
-            }
-            .filter-grid {
-                gap: 12px;
-            }
-            .main-layout {
-                gap: 16px;
+            #map {
+                min-height: 350px;
             }
             .map-column {
-                width: 100%;
-                aspect-ratio: 1 / 1;
-            }
-            .store-list-column {
-                width: 100%;
+                height: 400px;
             }
             .store-list-content {
-                max-height: 500px;
-                overflow-y: auto;
-            }
-            .store-item {
-                padding: 12px;
-            }
-            .store-item h3 {
-                font-size: 0.9375rem;
-            }
-            .store-item p {
-                font-size: 0.8125rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .container {
-                padding: 8px;
-            }
-            .main-title {
-                font-size: 1.125rem;
-                margin-bottom: 12px;
-            }
-            .filter-section {
-                padding: 10px;
-            }
-            .filter-input,
-            .filter-select {
-                padding: 10px;
-                font-size: 13px;
-            }
-            .search-button {
-                padding: 10px 20px;
-                font-size: 13px;
-            }
-            .map-column {
-                aspect-ratio: 1 / 1;
-            }
-            .store-list-content {
-                max-height: 400px;
-            }
-            .store-list-header {
-                padding: 12px;
-            }
-            .store-list-header h2 {
-                font-size: 1rem;
+                height: 400px;
             }
         }
         /* Custom Marker Styles */
@@ -699,7 +533,7 @@
     <!-- Nội dung chính -->
     <main class="container">
         
-        <h1 class="main-title">Hệ thống Phòng giao dịch Y99</h1>
+        <h1 class="main-title">Hệ thống Phòng giao dịch</h1>
 
         <!-- Bộ lọc -->
         <div class="filter-section">
@@ -714,10 +548,10 @@
                 </select>
                 <select id="district-select" class="filter-select">
                     <option value="">Chọn Quận/Huyện</option>
-                    <option value="nk" data-province="ct">Quận Ninh Kiều</option>
-                    <option value="vl" data-province="vl">TP. Vĩnh Long</option>
-                    <option value="bn" data-province="bn">TP. Bắc Ninh</option>
-                    <option value="q5" data-province="hcm">Quận 5</option>
+                    <option value="nk">Quận Ninh Kiều</option>
+                    <option value="vl">TP. Vĩnh Long</option>
+                    <option value="bn">TP. Bắc Ninh</option>
+                    <option value="q5">Quận 5</option>
                 </select>
                 <button type="button" id="search-button" class="search-button">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -779,16 +613,6 @@
                         </div>
 
                     </div>
-                    
-                    <!-- Show More Button -->
-                    <div class="show-more-container" id="show-more-container" style="display: none;">
-                        <button type="button" class="show-more-button" id="show-more-button">
-                            <span id="show-more-text">Xem thêm</span>
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                            </svg>
-                        </button>
-                    </div>
                 </div>
             </div>
 
@@ -816,138 +640,6 @@
             { id: 2, lat: 21.1861, lng: 106.0763, title: "Bắc Ninh", address: "456 Đường Lý Thái Tổ, Phường Đại Phúc, TP. Bắc Ninh", province: "bn", district: "bn" },
             { id: 3, lat: 10.7769, lng: 106.7009, title: "TP. Hồ Chí Minh", address: "789 Đường Nguyễn Trãi, Phường 5, Quận 5, TP. Hồ Chí Minh", province: "hcm", district: "q5" }
         ];
-
-        // Số lượng mục hiển thị ban đầu
-        const INITIAL_ITEMS_TO_SHOW = 2;
-        let isExpanded = false;
-
-        // Hàm cập nhật dropdown quận/huyện dựa trên tỉnh/thành phố
-        function updateDistrictOptions() {
-            const provinceSelect = document.getElementById('province-select');
-            const districtSelect = document.getElementById('district-select');
-            const selectedProvince = provinceSelect.value;
-            
-            // Lấy tất cả các option trong district-select (trừ option đầu tiên "Chọn Quận/Huyện")
-            const districtOptions = districtSelect.querySelectorAll('option:not([value=""])');
-            
-            // Reset dropdown quận/huyện
-            districtSelect.value = '';
-            
-            // Ẩn/hiện các option dựa trên tỉnh/thành phố đã chọn
-            districtOptions.forEach(option => {
-                const optionProvince = option.getAttribute('data-province');
-                if (!selectedProvince || optionProvince === selectedProvince) {
-                    option.style.display = 'block';
-                } else {
-                    option.style.display = 'none';
-                }
-            });
-        }
-
-        // Hàm lấy các mục đang hiển thị (không bị filter ẩn)
-        function getVisibleStoreItems() {
-            const allItems = document.querySelectorAll('.store-item');
-            return Array.from(allItems).filter(item => {
-                return item.style.display !== 'none';
-            });
-        }
-
-        // Hàm khởi tạo Show More
-        function initShowMore() {
-            const visibleItems = getVisibleStoreItems();
-            const showMoreContainer = document.getElementById('show-more-container');
-            const showMoreButton = document.getElementById('show-more-button');
-            const showMoreText = document.getElementById('show-more-text');
-            
-            if (visibleItems.length <= INITIAL_ITEMS_TO_SHOW) {
-                // Nếu số lượng mục <= số lượng hiển thị ban đầu, ẩn nút
-                showMoreContainer.style.display = 'none';
-                return;
-            }
-            
-            // Hiển thị nút nếu có nhiều hơn INITIAL_ITEMS_TO_SHOW mục
-            showMoreContainer.style.display = 'block';
-            
-            // Ẩn các mục sau INITIAL_ITEMS_TO_SHOW
-            visibleItems.forEach((item, index) => {
-                if (index >= INITIAL_ITEMS_TO_SHOW) {
-                    item.classList.add('hidden-item');
-                }
-            });
-            
-            // Xử lý click nút (chỉ thêm listener một lần)
-            if (!showMoreButton.dataset.listenerAdded) {
-                showMoreButton.addEventListener('click', function() {
-                    isExpanded = !isExpanded;
-                    const allVisibleItems = getVisibleStoreItems();
-                    
-                    if (isExpanded) {
-                        // Hiển thị tất cả các mục đang visible (không bị filter)
-                        allVisibleItems.forEach(item => {
-                            item.classList.remove('hidden-item');
-                        });
-                        showMoreText.textContent = 'Thu gọn';
-                        showMoreButton.classList.add('expanded');
-                    } else {
-                        // Ẩn các mục sau INITIAL_ITEMS_TO_SHOW
-                        allVisibleItems.forEach((item, index) => {
-                            if (index >= INITIAL_ITEMS_TO_SHOW) {
-                                item.classList.add('hidden-item');
-                            } else {
-                                item.classList.remove('hidden-item');
-                            }
-                        });
-                        showMoreText.textContent = 'Xem thêm';
-                        showMoreButton.classList.remove('expanded');
-                        
-                        // Cuộn lên đầu danh sách
-                        const storeListContent = document.querySelector('.store-list-content');
-                        if (storeListContent) {
-                            storeListContent.scrollTop = 0;
-                        }
-                    }
-                });
-                showMoreButton.dataset.listenerAdded = 'true';
-            }
-        }
-
-        // Hàm cập nhật Show More sau khi filter
-        function updateShowMore() {
-            const visibleItems = getVisibleStoreItems();
-            const showMoreContainer = document.getElementById('show-more-container');
-            const showMoreButton = document.getElementById('show-more-button');
-            const showMoreText = document.getElementById('show-more-text');
-            
-            if (visibleItems.length <= INITIAL_ITEMS_TO_SHOW) {
-                showMoreContainer.style.display = 'none';
-                isExpanded = false;
-                // Xóa hidden-item khỏi tất cả các mục
-                document.querySelectorAll('.store-item').forEach(item => {
-                    item.classList.remove('hidden-item');
-                });
-                return;
-            }
-            
-            showMoreContainer.style.display = 'block';
-            
-            if (!isExpanded) {
-                // Ẩn các mục sau INITIAL_ITEMS_TO_SHOW
-                visibleItems.forEach((item, index) => {
-                    if (index >= INITIAL_ITEMS_TO_SHOW) {
-                        item.classList.add('hidden-item');
-                    } else {
-                        item.classList.remove('hidden-item');
-                    }
-                });
-                showMoreText.textContent = 'Xem thêm';
-                showMoreButton.classList.remove('expanded');
-            } else {
-                // Hiển thị tất cả nếu đang expanded
-                visibleItems.forEach(item => {
-                    item.classList.remove('hidden-item');
-                });
-            }
-        }
 
 
         // Tạo custom marker icon dạng pin với border xanh và logo bên trong
@@ -1008,9 +700,6 @@
 
             // Cập nhật số lượng kết quả
             document.getElementById('results-count').textContent = `Tìm thấy ${visibleCount} phòng giao dịch`;
-            
-            // Cập nhật Show More sau khi filter
-            updateShowMore();
         }
 
         // Hàm highlight marker và scroll đến item trong danh sách
@@ -1085,24 +774,12 @@
                 maxZoom: 19
             }).addTo(mapInstance);
 
-            // Đảm bảo map được resize đúng cách - gọi nhiều lần
+            // Đảm bảo map được resize đúng cách
             setTimeout(function() {
                 if (mapInstance) {
                     mapInstance.invalidateSize();
                 }
             }, 100);
-            
-            setTimeout(function() {
-                if (mapInstance) {
-                    mapInstance.invalidateSize();
-                }
-            }, 300);
-            
-            setTimeout(function() {
-                if (mapInstance) {
-                    mapInstance.invalidateSize();
-                }
-            }, 600);
 
             // Tạo LayerGroup để quản lý tất cả markers
             const markerGroup = L.layerGroup();
@@ -1143,10 +820,7 @@
             // Xóa event listeners cũ bằng cách clone và replace (chỉ khi cần)
             if (!searchInput.dataset.listenerAdded) {
                 searchInput.addEventListener('input', filterStores);
-                provinceSelect.addEventListener('change', function() {
-                    updateDistrictOptions();
-                    filterStores();
-                });
+                provinceSelect.addEventListener('change', filterStores);
                 districtSelect.addEventListener('change', filterStores);
                 searchButton.addEventListener('click', filterStores);
                 searchInput.dataset.listenerAdded = 'true';
@@ -1187,119 +861,34 @@
 
         // Khởi tạo map khi DOM ready
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', function() {
-                initializeMap();
-                initShowMore();
-                updateDistrictOptions(); // Khởi tạo dropdown quận/huyện
-            });
+            document.addEventListener('DOMContentLoaded', initializeMap);
         } else {
             initializeMap();
-            initShowMore();
-            updateDistrictOptions(); // Khởi tạo dropdown quận/huyện
-        }
-
-        // Hàm resize map - gọi nhiều lần để đảm bảo
-        function resizeMap() {
-            if (mapInstance) {
-                mapInstance.invalidateSize();
-            }
         }
 
         // Xử lý khi trang được nhúng trong iframe (cho blog)
         window.addEventListener('load', function() {
-            // Gọi nhiều lần với delay khác nhau để đảm bảo map resize đúng
             setTimeout(function() {
                 if (mapInstance) {
-                    resizeMap();
+                    mapInstance.invalidateSize();
                 } else {
                     initializeMap();
                 }
-            }, 100);
-            
-            setTimeout(function() {
-                resizeMap();
-            }, 300);
-            
-            setTimeout(function() {
-                resizeMap();
-            }, 500);
+            }, 200);
         });
 
         // Xử lý resize khi iframe được resize
         if (window.parent !== window) {
             // Đang trong iframe
             let resizeTimer;
-            
-            // Xử lý window resize
             window.addEventListener('resize', function() {
                 clearTimeout(resizeTimer);
                 resizeTimer = setTimeout(function() {
-                    resizeMap();
+                    if (mapInstance) {
+                        mapInstance.invalidateSize();
+                    }
                 }, 100);
             });
-            
-            // Sử dụng ResizeObserver để theo dõi thay đổi kích thước của map container
-            const mapElement = document.getElementById('map');
-            if (mapElement && window.ResizeObserver) {
-                const resizeObserver = new ResizeObserver(function(entries) {
-                    clearTimeout(resizeTimer);
-                    resizeTimer = setTimeout(function() {
-                        resizeMap();
-                    }, 150);
-                });
-                resizeObserver.observe(mapElement);
-                
-                // Quan sát cả container cha
-                const mapContainer = mapElement.closest('.map-container');
-                if (mapContainer) {
-                    resizeObserver.observe(mapContainer);
-                }
-            }
-            
-            // Lắng nghe message từ parent window (nếu parent gửi resize event)
-            window.addEventListener('message', function(event) {
-                if (event.data && event.data.type === 'resize') {
-                    setTimeout(resizeMap, 100);
-                }
-            });
-            
-            // Thử gọi resize từ parent window
-            try {
-                if (window.parent.postMessage) {
-                    window.parent.postMessage({ type: 'iframe-loaded' }, '*');
-                }
-            } catch (e) {
-                // Ignore cross-origin errors
-            }
-        }
-        
-        // Xử lý khi DOM thay đổi (cho trường hợp dynamic content)
-        if (window.MutationObserver) {
-            const mutationObserver = new MutationObserver(function(mutations) {
-                let shouldResize = false;
-                mutations.forEach(function(mutation) {
-                    if (mutation.type === 'attributes' && 
-                        (mutation.attributeName === 'style' || mutation.attributeName === 'class')) {
-                        const target = mutation.target;
-                        if (target.id === 'map' || target.closest('#map') || target.closest('.map-container')) {
-                            shouldResize = true;
-                        }
-                    }
-                });
-                if (shouldResize) {
-                    setTimeout(resizeMap, 200);
-                }
-            });
-            
-            // Quan sát body và container
-            const container = document.querySelector('.container');
-            if (container) {
-                mutationObserver.observe(container, {
-                    attributes: true,
-                    attributeFilter: ['style', 'class'],
-                    subtree: true
-                });
-            }
         }
     </script>
 
