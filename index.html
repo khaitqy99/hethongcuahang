@@ -226,6 +226,7 @@
             min-width: 0;
             aspect-ratio: 1 / 1;
             width: 100%;
+            position: relative;
         }
         .map-container {
             background-color: #ffffff;
@@ -234,6 +235,7 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
+            position: relative;
         }
         .store-list-scrollbar::-webkit-scrollbar {
             width: 6px;
@@ -277,6 +279,8 @@
             height: 100%;
             width: 100%;
             border-radius: 8px;
+            position: relative;
+            min-height: 300px;
         }
         /* Mobile Tab Navigation - Ẩn hoàn toàn */
         .mobile-tabs {
@@ -1081,12 +1085,24 @@
                 maxZoom: 19
             }).addTo(mapInstance);
 
-            // Đảm bảo map được resize đúng cách
+            // Đảm bảo map được resize đúng cách - gọi nhiều lần
             setTimeout(function() {
                 if (mapInstance) {
                     mapInstance.invalidateSize();
                 }
             }, 100);
+            
+            setTimeout(function() {
+                if (mapInstance) {
+                    mapInstance.invalidateSize();
+                }
+            }, 300);
+            
+            setTimeout(function() {
+                if (mapInstance) {
+                    mapInstance.invalidateSize();
+                }
+            }, 600);
 
             // Tạo LayerGroup để quản lý tất cả markers
             const markerGroup = L.layerGroup();
@@ -1182,29 +1198,108 @@
             updateDistrictOptions(); // Khởi tạo dropdown quận/huyện
         }
 
+        // Hàm resize map - gọi nhiều lần để đảm bảo
+        function resizeMap() {
+            if (mapInstance) {
+                mapInstance.invalidateSize();
+            }
+        }
+
         // Xử lý khi trang được nhúng trong iframe (cho blog)
         window.addEventListener('load', function() {
+            // Gọi nhiều lần với delay khác nhau để đảm bảo map resize đúng
             setTimeout(function() {
                 if (mapInstance) {
-                    mapInstance.invalidateSize();
+                    resizeMap();
                 } else {
                     initializeMap();
                 }
-            }, 200);
+            }, 100);
+            
+            setTimeout(function() {
+                resizeMap();
+            }, 300);
+            
+            setTimeout(function() {
+                resizeMap();
+            }, 500);
         });
 
         // Xử lý resize khi iframe được resize
         if (window.parent !== window) {
             // Đang trong iframe
             let resizeTimer;
+            
+            // Xử lý window resize
             window.addEventListener('resize', function() {
                 clearTimeout(resizeTimer);
                 resizeTimer = setTimeout(function() {
-                    if (mapInstance) {
-                        mapInstance.invalidateSize();
-                    }
+                    resizeMap();
                 }, 100);
             });
+            
+            // Sử dụng ResizeObserver để theo dõi thay đổi kích thước của map container
+            const mapElement = document.getElementById('map');
+            if (mapElement && window.ResizeObserver) {
+                const resizeObserver = new ResizeObserver(function(entries) {
+                    clearTimeout(resizeTimer);
+                    resizeTimer = setTimeout(function() {
+                        resizeMap();
+                    }, 150);
+                });
+                resizeObserver.observe(mapElement);
+                
+                // Quan sát cả container cha
+                const mapContainer = mapElement.closest('.map-container');
+                if (mapContainer) {
+                    resizeObserver.observe(mapContainer);
+                }
+            }
+            
+            // Lắng nghe message từ parent window (nếu parent gửi resize event)
+            window.addEventListener('message', function(event) {
+                if (event.data && event.data.type === 'resize') {
+                    setTimeout(resizeMap, 100);
+                }
+            });
+            
+            // Thử gọi resize từ parent window
+            try {
+                if (window.parent.postMessage) {
+                    window.parent.postMessage({ type: 'iframe-loaded' }, '*');
+                }
+            } catch (e) {
+                // Ignore cross-origin errors
+            }
+        }
+        
+        // Xử lý khi DOM thay đổi (cho trường hợp dynamic content)
+        if (window.MutationObserver) {
+            const mutationObserver = new MutationObserver(function(mutations) {
+                let shouldResize = false;
+                mutations.forEach(function(mutation) {
+                    if (mutation.type === 'attributes' && 
+                        (mutation.attributeName === 'style' || mutation.attributeName === 'class')) {
+                        const target = mutation.target;
+                        if (target.id === 'map' || target.closest('#map') || target.closest('.map-container')) {
+                            shouldResize = true;
+                        }
+                    }
+                });
+                if (shouldResize) {
+                    setTimeout(resizeMap, 200);
+                }
+            });
+            
+            // Quan sát body và container
+            const container = document.querySelector('.container');
+            if (container) {
+                mutationObserver.observe(container, {
+                    attributes: true,
+                    attributeFilter: ['style', 'class'],
+                    subtree: true
+                });
+            }
         }
     </script>
 
