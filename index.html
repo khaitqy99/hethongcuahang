@@ -120,10 +120,6 @@
             font-weight: 600;
             color: #374151;
         }
-        .store-list-content {
-            overflow-y: auto;
-            height: 600px;
-        }
         /* Store Item */
         .store-item {
             padding: 16px;
@@ -161,19 +157,6 @@
         .store-directions:hover {
             color: #00b4fb;
         }
-        .store-list-scrollbar::-webkit-scrollbar {
-            width: 6px;
-        }
-        .store-list-scrollbar::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-        .store-list-scrollbar::-webkit-scrollbar-thumb {
-            background: #c1c1c1;
-            border-radius: 6px;
-        }
-        .store-list-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #a8a8a8;
-        }
         /* Input và Select - Cải thiện độ tương phản */
         input[type="text"],
         input[type="search"],
@@ -197,11 +180,6 @@
         select option {
             background-color: #ffffff !important;
             color: #1f2937 !important;
-        }
-        @media (max-width: 768px) {
-            .store-list-content {
-                height: 400px;
-            }
         }
         /* Store Item Highlight */
         .store-item.highlighted {
@@ -531,8 +509,8 @@
                         <h2 id="results-count">Tìm thấy 4 phòng giao dịch</h2>
                     </div>
                     
-                    <!-- Danh sách cuộn được -->
-                    <div id="store-list" class="store-list-content store-list-scrollbar">
+                    <!-- Danh sách phòng giao dịch -->
+                    <div id="store-list" class="store-list-content">
                         
                         <!-- Mục 1 -->
                         <div class="store-item" data-id="0" data-province="ct" data-district="nk" data-name="Y99 Cần Thơ" data-address="99B Nguyễn Trãi, Phường Ninh Kiều, Thành phố Cần Thơ">
